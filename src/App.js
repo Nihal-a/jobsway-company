@@ -1,8 +1,9 @@
+// import Register from "./pages/Register";
 
 function App() {
   return (
     <div className="App">
-     <h1>Hello Company</h1>
+      {/* <Register /> */}
     </div>
   );
 }
