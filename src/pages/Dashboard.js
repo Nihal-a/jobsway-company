@@ -16,9 +16,15 @@ function Dashboard() {
         )
     }
 
+    const Verified = () => {
+        return(
+            <Sidenav />
+        )
+    }
+
     return (
         <div>
-            {verify ? <Sidenav /> : <UnVerify/>}
+            {verify ? <Verified/> : <UnVerify/>}
         </div>
     )
 }
