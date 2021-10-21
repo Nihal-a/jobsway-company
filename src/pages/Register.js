@@ -36,9 +36,9 @@ function Register() {
                         <input type="text" placeholder="Instagram" className="ml-0.5 text-sm w-48 h-10 rounded-md font-light border-none outline-none p-3 bg-secondary" />
                     </div>
                     <h6 className="mt-20 font-normal">Create password :  </h6>
-                    <input type="password" placeholder="Password" className="mt-1 ml-0.5 text-sm w-96 h-10 rounded-md font-light border-none outline-none p-3 bg-secondary"  />
-                    <input type="Password" placeholder="Confirm Password" className="mt-2 ml-0.5 text-sm w-96 h-10 rounded-md font-light border-none outline-none p-3 bg-secondary"  />
-                        <button className="w-full rounded-md my-5 bg-primary p-1" type="submit" style={{color:'#fff'}}>Register Your Company</button>
+                    <input type="password" placeholder="Password" className="mt-1 ml-0.5 text-sm w-96 h-10 rounded-md font-light border-none outline-none p-3 bg-secondary" />
+                    <input type="Password" placeholder="Confirm Password" className="mt-2 ml-0.5 text-sm w-96 h-10 rounded-md font-light border-none outline-none p-3 bg-secondary" />
+                    <button className="w-full rounded-md my-5 bg-primary p-1" type="submit" style={{ color: '#fff' }}>Register Your Company</button>
                 </form>
             </div>
         </div>
