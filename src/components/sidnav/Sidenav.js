@@ -3,6 +3,10 @@ import { Icon } from '@iconify/react';
 
 function Sidenav() {
 
+    const logout = () => {
+        
+    }
+
     return (
         <div className="h-screen w-64 bg-white border-r-2 flex flex-col justify-between items-center">
             <a className="font-semibold text-xl mt-4">JobsWay.</a>
