@@ -1,9 +1,16 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Sidenav from '../components/sidnav/Sidenav'
+import { useLocation } from 'react-router-dom'
 
 function Dashboard() {
 
-    const [verify, setVerify] = useState(false)
+    const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+    const [verify, setVerify] = useState(company.company.status)
+    const location = useLocation()
+
+    useEffect(() => {
+        console.log(company.company.status);
+    }, [location])
 
     const UnVerify = () => {
         return(

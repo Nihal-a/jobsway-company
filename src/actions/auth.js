@@ -8,7 +8,7 @@ export const register = (formData,history) => async (dispatch) => {
         console.log(data);
         if(data.company){
             dispatch({type:REGISTER,data})
-            // history.push('/')
+            history.push('/')
         }else{
             history.push('/register', {Err: 'Company already exists.'})
         }

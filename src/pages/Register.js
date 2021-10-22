@@ -5,7 +5,7 @@ import {useHistory,useLocation} from 'react-router-dom'
 import {register} from '../actions/auth'
 
 
-const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '',status:false }
+const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false }
 
 function Register() {
 
