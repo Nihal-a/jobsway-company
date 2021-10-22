@@ -1,9 +1,10 @@
-import { } from "../constants/actionTypes"
+import { REGISTER} from "../constants/actionTypes"
 
 export default  (state = {authData : null},action) => {
     switch (action.type) {
-        case "SIGNUP":
-            return state
+        case REGISTER:
+            localStorage.setItem('company',JSON.stringify({...action?.data}))
+            return {...state,authData:action?.data}
         default:
             return state
     }

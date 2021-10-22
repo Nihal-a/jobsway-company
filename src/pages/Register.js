@@ -20,6 +20,7 @@ function Register() {
         e.preventDefault()
         setPasswordErr('')
         if(formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
+        delete formData.confirmPassword
         dispatch(register(formData,history))
     }
     const handleChange = (e) => {
