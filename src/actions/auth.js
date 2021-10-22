@@ -16,3 +16,19 @@ export const register = (formData,history) => async (dispatch) => {
         console.log({error:error.message});
     }
 }
+
+export const login = (formData,history) => async (dispatch) => {
+    try {
+        const {data} = await api.login(formData)
+        if(data.company){
+            // dispatch({type:REGISTER,data})
+            // history.push('/')
+            console.log(data.company);
+        }else{
+            console.log(data);
+            history.push('/login', {Err: 'Invalid Credentials.'})
+        }
+    } catch (error) {
+        console.log({error:error.message});
+    }
+}

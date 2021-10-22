@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import noImage from '../assets/images/noImage.jpg'
 import { useDispatch } from 'react-redux'
-import {useHistory,useLocation} from 'react-router-dom'
+import {useHistory,useLocation,Link} from 'react-router-dom'
 import {register} from '../actions/auth'
 
 
@@ -67,6 +67,14 @@ function Register() {
                     {location.state !== undefined && <p className="text-red-800 mt-2" style={{color:'red'}}>Company already exists</p> }
                     {passwordErr && <p className="text-red-800 text-sm" style={{color:'red'}}>{passwordErr}</p> }
                     <button className="w-full rounded-md my-5 bg-primary p-1" type="submit" style={{ color: '#fff' }}>Register Your Company</button>
+                    <div className="text-center w-full">
+                    <p className="my-2 text-sm font-light ">
+                Already on JobsWay?
+                <Link to="/login" style={{ color: "#008FAE" }} className="underline ">
+                    Log in now
+                </Link>
+            </p>
+                    </div>
                 </form>
             </div>
         </div>
