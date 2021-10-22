@@ -1,10 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Icon } from '@iconify/react';
+import { useDispatch } from 'react-redux';
+import { LOGOUT } from '../../constants/actionTypes';
+import { useHistory } from 'react-router-dom';
+
+
 
 function Sidenav() {
 
-    const logout = () => {
+    const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const logout = (e) => {
+        e.preventDefault()
+        dispatch({type : LOGOUT});
         
+        history.push('/');
+        
+        setCompany(null);
     }
 
     return (
@@ -34,7 +48,7 @@ function Sidenav() {
                 </a>
             </div>
 
-            <h4 className="mb-6">Nihal Avulan</h4>
+            <h4 className="mb-6">{company.company.companyName}</h4>
         </div>
     )
 }

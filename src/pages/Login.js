@@ -2,39 +2,19 @@ import React, { useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory ,Link,useLocation} from 'react-router-dom'
 import { login } from '../actions/auth'
-import jwtDecode from 'jwt-decode'
-import { LOGOUT } from '../constants/actionTypes'
-
 
 const initialState = { email: '', password: '' }
 
 function Login() {
 
     const [formData, setformData] = useState(initialState)
-    const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
     const dispatch = useDispatch()
-    const history = useHistory()
     const location = useLocation()
+    const history = useHistory()
 
     useEffect(() => {
         location.state = undefined
-        const token = company?.token
-        
-        if(token){
-            const decodedToken = jwtDecode(token)
-            if(decodedToken.exp * 1000 < new Date().getTime()) logout();
-        }
-        setCompany(JSON.parse(localStorage.getItem('company')))
     },[location])
-
-    const logout = (e) => {
-        e.preventDefault()
-        dispatch({type : LOGOUT});
-        
-        history.push('/');
-        
-        setCompany(null);
-    }
 
     const handleChange = (e) => {
         e.preventDefault()
