@@ -9,7 +9,7 @@ function Dashboard() {
     const location = useLocation()
 
     useEffect(() => {
-        console.log(company.company.status);
+        
     }, [location])
 
     const UnVerify = () => {

@@ -5,7 +5,6 @@ import * as api from '../api/index'
 export const register = (formData,history) => async (dispatch) => {
     try {
         const {data} = await api.register(formData)
-        console.log(data);
         if(data.company){
             dispatch({type:REGISTER,data})
             history.push('/')
@@ -21,11 +20,9 @@ export const login = (formData,history) => async (dispatch) => {
     try {
         const {data} = await api.login(formData)
         if(data.company){
-            // dispatch({type:REGISTER,data})
-            // history.push('/')
-            console.log(data.company);
+            dispatch({type:REGISTER,data})
+            history.push('/')
         }else{
-            console.log(data);
             history.push('/login', {Err: 'Invalid Credentials.'})
         }
     } catch (error) {
