@@ -7,6 +7,7 @@ function Dashboard() {
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
     const [verify, setVerify] = useState(company.company.status)
     const location = useLocation()
+    
 
     useEffect(() => {
         

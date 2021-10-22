@@ -1,21 +1,26 @@
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { BrowserRouter as Router , Route ,Redirect,Switch } from 'react-router-dom'
+import { BrowserRouter as Router , Route ,Redirect,Switch,useLocation} from 'react-router-dom'
+import { useEffect, useState } from "react";
+
 
 function App() {
+
+  const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/">
-            <Dashboard/>
+            {company ? <Dashboard/> : <Redirect to="/login" />}
           </Route>
           <Route path="/login">
-            <Login/>
+            {company ? <Redirect to="/" /> : <Login/>}
           </Route>
           <Route path="/register">
-            <Register/>
+            {company ? <Redirect to="/" /> : <Register/>}
           </Route>
         </Switch>
       </Router>
