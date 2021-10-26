@@ -9,6 +9,7 @@ function Register() {
 
     const [formData, setformData] = useState(initialState)
     const [passwordErr, setPasswordErr] = useState('')
+    const [phoneErr, setPhoneErr] = useState('')
     const location = useLocation()
     const dispatch = useDispatch()
     const history = useHistory()
@@ -22,6 +23,8 @@ function Register() {
     const handleSubmit = (e) => {
         e.preventDefault()
         setPasswordErr('')
+        if(formData.phone.length < 10 ) return setPhoneErr('Phone number invalid.')
+        if(formData.password.length < 8 ) return setPasswordErr('Password must need minimum 8 characters.')
         if(formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
         delete formData.confirmPassword
         dispatch(register(formData,history))
@@ -39,6 +42,7 @@ function Register() {
             <div className="">
                 <h3 className="text-3xl font-semibold mt-8 text-center">Register Your <span className="text-primary">Company</span></h3>
                 <form action="" className="flex flex-col items-start" onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
+                {phoneErr && <p className="text-red-800 text-sm" style={{color:'red'}}>{phoneErr}</p> }
                     <h6 className="mt-4 font-normal">Basic Details :</h6>
                     <p className="font-light text-secondary text-sm">Enter the details of company</p>
                     <div className="mt-3">
