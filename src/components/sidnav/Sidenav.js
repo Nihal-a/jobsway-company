@@ -48,7 +48,7 @@ function Sidenav() {
                 </a>
             </div>
 
-            <h4 className="mb-6">{company.company.companyName}</h4>
+            <h4 className="mb-6">{company?.company.companyName}</h4>
         </div>
     )
 }
