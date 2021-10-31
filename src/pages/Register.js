@@ -1,3 +1,4 @@
+import  Axios  from 'axios'
 import React, { useState,useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {useHistory,useLocation,Link} from 'react-router-dom'
@@ -5,7 +6,7 @@ import {register} from '../actions/auth'
 import noImage from '../assets/images/noImage.jpg'
 import '../index.css'
 
-const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false }
+const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false ,imgUrl : ''}
 
 function Register() {
 
@@ -24,7 +25,6 @@ function Register() {
     const handleImageChange = (e) => {
         const reader = new FileReader()
         reader.onload = () => {
-            console.log("hello");
             if(reader.readyState === 2) {
                 setImage(reader.result)
             }
@@ -39,8 +39,19 @@ function Register() {
         if(formData.password.length < 8 ) return setPasswordErr('Password must need minimum 8 characters.')
         if(formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
         delete formData.confirmPassword
-        dispatch(register(formData,history))
+
+        const imageData = new FormData()
+            imageData.append("file",image)
+            imageData.append("upload_preset",process.env.REACT_APP_CLOUDINARY_NAME)
+
+            Axios.post(`${process.env.REACT_APP_CLOUDINARY_BASE_URL}/image/upload`,imageData).then(({data}) => {
+                formData.imgUrl = data.url
+                dispatch(register(formData,history))
+            }).catch((err) => {
+                console.log("Image upload Err :" ,err);
+            })
     }
+
     const handleChange = (e) => {
         e.preventDefault()
         setformData({ ...formData, [e.target.name]: e.target.value })
@@ -48,8 +59,6 @@ function Register() {
     useEffect(() => {
         location.state = undefined
       },[location,formData])
-
-      
 
     return (
         <div className="flex flex-col items-center py-8">
@@ -70,10 +79,10 @@ function Register() {
                     </div>
                     <textarea onChange={handleChange}  name="bio" placeholder="About your Company" className="text-sm font-light bg-secondary w-full mt-3 rounded-md h-40 border-none outline-none p-3 "/>
                     <div className="w-full h-40 mt-4 flex items-center flex-col">
-                        <img src={image} alt="" className="w-36" />
+                        <img src={image} alt="" className="w-36 rounded-md" />
                         <div className="bg-dark relative overflow-hidden h-10 mt-2 flex items-center p-3 rounded-md ">
                             <span className="text-sm text-white font-light">Upload Logo</span>
-                            <input type="file" className="absolute inset-0 text-md pointer opacity-0 w-28 h-16 bg-primary" accept="image/*" onChange={handleImageChange} />
+                            <input type="file" className="absolute inset-0 text-md pointer opacity-0 w-28 h-16 bg-primary" accept="image/*" onChange={handleImageChange} required/>
                         </div>
                     </div>
                     <h6 className="mt-28 font-normal">Connect Social Media : </h6>
