@@ -21,3 +21,9 @@ body{
     display: flex;
     align-items: center;
 }
+
+input::-webkit-file-upload-button {
+    cursor: pointer !important;
+    height: 42px;
+    width: 100%;
+}

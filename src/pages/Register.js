@@ -2,6 +2,8 @@ import React, { useState,useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {useHistory,useLocation,Link} from 'react-router-dom'
 import {register} from '../actions/auth'
+import noImage from '../assets/images/noImage.jpg'
+import '../index.css'
 
 const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false }
 
@@ -9,6 +11,7 @@ function Register() {
 
     const [formData, setformData] = useState(initialState)
     const [passwordErr, setPasswordErr] = useState('')
+    const [image, setImage] = useState(noImage)
     const [phoneErr, setPhoneErr] = useState('')
     const location = useLocation()
     const dispatch = useDispatch()
@@ -17,8 +20,17 @@ function Register() {
     useEffect(() => {
         location.state = undefined
     },[location])
-
  
+    const handleImageChange = (e) => {
+        const reader = new FileReader()
+        reader.onload = () => {
+            console.log("hello");
+            if(reader.readyState === 2) {
+                setImage(reader.result)
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -36,6 +48,8 @@ function Register() {
     useEffect(() => {
         location.state = undefined
       },[location,formData])
+
+      
 
     return (
         <div className="flex flex-col items-center py-8">
@@ -55,6 +69,13 @@ function Register() {
                         <input required onChange={handleChange} name="phone" type="text" placeholder="Phone" className="ml-0.5 text-sm w-48 h-10 rounded-md font-light border-none outline-none p-3 bg-secondary" />
                     </div>
                     <textarea onChange={handleChange}  name="bio" placeholder="About your Company" className="text-sm font-light bg-secondary w-full mt-3 rounded-md h-40 border-none outline-none p-3 "/>
+                    <div className="w-full h-40 mt-4 flex items-center flex-col">
+                        <img src={image} alt="" className="w-36" />
+                        <div className="bg-dark relative overflow-hidden h-10 mt-2 flex items-center p-3 rounded-md ">
+                            <span className="text-sm text-white font-light">Upload Logo</span>
+                            <input type="file" className="absolute inset-0 text-md pointer opacity-0 w-28 h-16 bg-primary" accept="image/*" onChange={handleImageChange} />
+                        </div>
+                    </div>
                     <h6 className="mt-28 font-normal">Connect Social Media : </h6>
                     <p className="font-light text-secondary text-sm">Input the links your accounts</p>
                     <div className="mt-3">
