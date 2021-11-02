@@ -6,7 +6,7 @@ import {register} from '../actions/auth'
 import noImage from '../assets/images/noImage.jpg'
 import '../index.css'
 
-const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false ,imgUrl : ''}
+const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false ,imgUrl : '',ban : false}
 
 function Register() {
 

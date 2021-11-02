@@ -16,31 +16,35 @@ function Routed() {
 
     useEffect(() => {
         const token = company?.token
-
         if (token) {
             const decodedToken = jwtDecode(token)
-            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+            if (decodedToken * 1000 < new Date().getTime()) logout();
         }
         setCompany(JSON.parse(localStorage.getItem('company')))
     }, [location])
 
-    const logout = (e) => {
+    const logout = () => {
         dispatch({ type: LOGOUT });
 
         history.push('/');
 
         setCompany(null);
     }
+    
+
     return (
         <Switch>
             <Route exact path="/">
-                {company ? <Dashboard /> : <Redirect to="/login" />}
+                {company ? <Dashboard /> :  <Redirect to="/login"/> }
             </Route>
             <Route path="/login">
                 {company ? <Redirect to="/" /> : <Login />}
             </Route>
             <Route path="/register">
                 {company ? <Redirect to="/" /> : <Register />}
+            </Route>
+            <Route path="/re-register">
+                {location.state?.state ? <Redirect to="/" /> : <Register />}
             </Route>
         </Switch>
     )
